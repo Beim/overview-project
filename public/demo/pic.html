@@ -1,0 +1,36 @@
+<body>
+    <input type='file' id='picFile' onChange='addImg(this)'></input>
+    <button onClick='getImg()'>getImage</button>
+    <img id='pic'></img>
+</body>
+
+<script>
+let dataUrl = ''
+const addImg = (obj) => {
+    let img = obj.files[0]
+    let fileReader = new FileReader()
+    fileReader.onload = (e) => {
+        dataUrl = e.target.result
+    }
+    fileReader.readAsDataURL(img)
+}
+
+getImg = () => {
+    let xhr = new XMLHttpRequest()
+    // 获得该类产品的信息
+    xhr.open('GET', '/api/lineup/Marine Products')
+    xhr.responseType = 'json'
+    xhr.onload = function (e) {
+        if (this.status === 200) {
+            let res = this.response
+            console.log(res)
+            // TODO: 从结果信息中筛选出图片的DataURL
+            
+            // 将DataURL添加给img
+            let img = document.getElementById('pic')
+            img.setAttribute('src', dataUrl)
+        } 
+    }
+    xhr.send()
+}
+</script>

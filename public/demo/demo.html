@@ -1,0 +1,17 @@
+<body>
+    <button onClick='fetchSitemap()'>sitemap</button>
+</body>
+
+<script>
+let fetchSitemap = () => {
+    let xhr = new XMLHttpRequest()
+    xhr.open('GET', '/api/sitemap')
+    xhr.responseType = 'json'
+    xhr.onload = (e) => {
+        let res = e.target.response
+        console.log(res)
+    }
+    xhr.send()
+}
+
+</script>
