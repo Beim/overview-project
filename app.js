@@ -31,6 +31,12 @@ app.use(parser({
 // koa-json
 app.use(json())
 
+// 判断资源是否需要权限
+// 若需要权限， 判断是否有权限
+app.use(function *(next) {
+    
+})
+
 // koa-router
 const routeOpts = require('./routes/config.json')
 for (let key in routeOpts) {

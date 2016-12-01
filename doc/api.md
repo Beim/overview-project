@@ -86,6 +86,17 @@ url: `/api/lineup/Marine Products`
 
 ----
 
+url: `/api/product/Marine Products/School Whiting`
+
+@param: proClass String; proName String
+
+@return:
+```
+
+```
+
+----
+
 # post
 
 ----

@@ -17,4 +17,9 @@ router.get('/lineup/:proClass', function *(next) {
     this.body = docs
 })
 
+router.get('/product/:proClass/:proName', function *(next) {
+    let proClass = this.params.proClass
+    let proName = this.params.proName
+})
+
 module.exports = router

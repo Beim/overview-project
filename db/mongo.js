@@ -76,6 +76,21 @@ exports.get = {
     }
 }
 
+// 提交内容
+exports.post = {
+    
+}
+
+// 更新内容
+exports.put = {
+    
+}
+
+// 删除内容
+exports.del = {
+    
+}
+
 // exports.get['sitemap']()
 // exports.get['productLineup']('Marine Products')
 
