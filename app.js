@@ -34,7 +34,7 @@ app.use(json())
 // 判断资源是否需要权限
 // 若需要权限， 判断是否有权限
 app.use(function *(next) {
-    
+   yield next 
 })
 
 // koa-router
