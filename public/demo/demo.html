@@ -1,5 +1,6 @@
 <body>
     <button onClick='fetchSitemap()'>sitemap</button>
+    <button onClick='fetchLineup()'>lineup</button>
     <button onClick='postProduct()'>postProduct</button>
     <button onClick='deleteProduct()'>deleteProduct</button>
 </body>
@@ -23,6 +24,13 @@ const fetch = (method, url, data = null) => {
 
 let fetchSitemap = () => {
     fetch('GET', '/api/sitemap')
+    .then((res) => {
+        console.log(res)
+    })
+}
+
+let fetchLineup = () => {
+    fetch('GET', '/api/lineup/Marine Products')
     .then((res) => {
         console.log(res)
     })
