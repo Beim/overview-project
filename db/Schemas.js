@@ -22,11 +22,11 @@ const Schemas = {
 
     'products': {
         // 产品类型
-        proClass: String,
+        proClass: {type: String, required: true},
         // 产品子类型
         proSubClass: String,
         // 产品名称
-        proName: {type: String, unique: true},
+        proName: {type: String, unique: true, required: true},
         area: String,
         // lineup页面中的缩略图, 为DataURL
         briefPic: String,
@@ -34,11 +34,10 @@ const Schemas = {
         page: [
             {
                 // 块样式类型
-                blockType: String,
+                blockType: {type: String, required: true},
                 content: Array
             }
         ]
-        
     }
 }
 

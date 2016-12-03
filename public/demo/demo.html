@@ -1,17 +1,72 @@
 <body>
     <button onClick='fetchSitemap()'>sitemap</button>
+    <button onClick='postProduct()'>postProduct</button>
+    <button onClick='deleteProduct()'>deleteProduct</button>
 </body>
 
 <script>
-let fetchSitemap = () => {
-    let xhr = new XMLHttpRequest()
-    xhr.open('GET', '/api/sitemap')
-    xhr.responseType = 'json'
-    xhr.onload = (e) => {
-        let res = e.target.response
-        console.log(res)
-    }
-    xhr.send()
+
+const fetch = (method, url, data = null) => {
+    return new Promise((res, rej) => {
+        let xhr = new XMLHttpRequest()
+        xhr.open(method, url, true)
+        if (['POST', 'PUT', 'DELETE'].includes(method)) {
+            xhr.setRequestHeader('content-type', 'application/x-javascript')
+            xhr.responseType = 'json'
+        }
+        xhr.onload = function (e) {
+            res(this.response)
+        }
+        xhr.send(data ? JSON.stringify(data) : null)
+    })
 }
 
+let fetchSitemap = () => {
+    fetch('GET', '/api/sitemap')
+    .then((res) => {
+        console.log(res)
+    })
+}
+
+let postProduct = () => {
+    let pro = {
+        proClass: 'Marine Products',
+        proSubClass: 'Marine Product',
+        proName: 'Octopousss',
+        briefPic: 'dataURL',
+        page: [
+            {
+                blockType: 0,
+                content: [
+                    'aaasdfsdaf',
+                    'dbfdfd'
+                ]
+            }
+        ]
+    }
+    fetch('POST', '/api/product', pro)
+    .then((res) => {
+        if (res > 0) {
+            console.log('上传成功')
+        }
+        else {
+            console.log('上传失败')
+        }
+    })
+        
+}
+
+let deleteProduct = () => {
+    let proClass = 'Marine Products'
+    let proName = 'Octopousss'
+    fetch('DELETE', `/api/product/${proClass}/${proName}`)
+    .then((res) => {
+        if (res > 0) {
+            console.log('删除成功')
+        }
+        else {
+            console.log('删除失败')
+        }
+    })
+}
 </script>

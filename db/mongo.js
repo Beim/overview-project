@@ -1,4 +1,6 @@
 const print_j = (obj, space = 4) => console.log(JSON.stringify(obj, null, space))
+const fs = require('fs')
+const path = require('path')
 const ACCOUNT = require('./account.json')
 const SCHEMAS = require('./Schemas.js')
 const mongoose = require('mongoose')
@@ -32,6 +34,16 @@ const gmodel = (name) => {
     return models[name].model
 }
 
+const log = (...args) => {
+    let logfile = path.resolve(__dirname, '../log/mongo-log.txt')
+    let date = new Date().toLocaleTimeString()
+    let str = args.join('\n')
+    let msg = `${date}\n${str}\n\n`
+    fs.writeFile(logfile, msg, {flag: 'a'}, (err) => {
+        if (err) console.log(err)
+    })
+}
+
 exports.get = {
     // 返回sitemap所需要的标题信息
     sitemap: () => {
@@ -57,7 +69,8 @@ exports.get = {
                 resolve(result)
             })
             .catch((e) => {
-                reject(e)
+                log('get-sitemap-error', e)
+                reject(-1)
             })
         })
     },
@@ -70,7 +83,8 @@ exports.get = {
                 resolve(docs)
             })
             .catch((e) => {
-                reject(e)
+                log('get-productLineup-error', e)
+                reject(-1)
             })
         })
     }
@@ -78,7 +92,24 @@ exports.get = {
 
 // 提交内容
 exports.post = {
-    
+
+    // 上传产品
+    product: (pro) => {
+        return new Promise((resolve, reject) => {
+            gmodel('products').create(pro)
+            .then((docs) => {
+                resolve(1)
+                // resolve(docs)
+            })
+            .catch((e) => {
+                log('post-product-error: ', e)
+                resolve(-1)
+            })
+            
+        })
+    },
+
+
 }
 
 // 更新内容
@@ -88,7 +119,20 @@ exports.put = {
 
 // 删除内容
 exports.del = {
-    
+    // 删除产品
+    product: (limit) => {
+        return new Promise((resolve, reject) => {
+            gmodel('products').remove(limit)
+            .then((docs) => {
+                resolve(1)
+                // resolve(docs)
+            })
+            .catch((e) => {
+                log('del-product-log', e)
+                resolve(-1)
+            })
+        })
+    }
 }
 
 // exports.get['sitemap']()
@@ -161,7 +205,6 @@ let products = [
         ]
     },
 ]
-
 
 let overviews = [
     {

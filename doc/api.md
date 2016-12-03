@@ -50,9 +50,9 @@ url: `/api/sitemap`
 
 ----
 
-url: `/api/lineup/Marine Products`
+url: `/api/lineup/{proClass}`
 
-@param: proClass String
+@param: ()
 
 @return:
 ```
@@ -86,9 +86,9 @@ url: `/api/lineup/Marine Products`
 
 ----
 
-url: `/api/product/Marine Products/School Whiting`
+url: `/api/product/{proClass}/{proName}`
 
-@param: proClass String; proName String
+@param: proClass String; proName String;
 
 @return:
 ```
@@ -101,9 +101,38 @@ url: `/api/product/Marine Products/School Whiting`
 
 ----
 
+url: `/api/product`
+
+@param: product Object;
+
+@return:
+```
+// 成功
+1
+
+// 失败
+-1
+```
+
+----
+
 # put
 
 ----
 
 # delete
 
+----
+
+url: `/api/product/{proClass}/{proName}`
+
+@param: ()
+
+@return:
+```
+// 成功
+1
+
+// 失败
+-1
+```
