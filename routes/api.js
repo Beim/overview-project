@@ -26,6 +26,11 @@ router.get('/product/:proClass/:proName', function *(next) {
     let proName = this.params.proName
 })
 
+router.get('/headerpic', function *(next) {
+    let pics = yield mongo.get.headerpic()
+    this.body = pics
+})
+
 /*
  * POST
  */
@@ -33,6 +38,12 @@ router.get('/product/:proClass/:proName', function *(next) {
 router.post('/product', function *(next) {
     let pro = this.request.body
     let res = yield mongo.post.product(pro)
+    this.body = res
+})
+
+router.post('/headerpic', function *(next) {
+    let pics = this.request.body
+    let res = yield mongo.post.headerpic(pics)
     this.body = res
 })
 

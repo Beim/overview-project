@@ -38,6 +38,11 @@ const Schemas = {
                 content: Array
             }
         ]
+    },
+
+    'headerpics': {
+        // 首页轮播图，仅用一个数组条目存储
+        pics: []
     }
 }
 

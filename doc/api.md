@@ -1,6 +1,6 @@
 # get
 
-url: `/api/sitemap`
+## url: `/api/sitemap`
 
 @param: ()
 
@@ -50,7 +50,7 @@ url: `/api/sitemap`
 
 ----
 
-url: `/api/lineup/{proClass}`
+## url: `/api/lineup/{proClass}`
 
 @param: ()
 
@@ -86,7 +86,7 @@ url: `/api/lineup/{proClass}`
 
 ----
 
-url: `/api/product/{proClass}/{proName}`
+## url: `/api/product/{proClass}/{proName}`
 
 @param: proClass String; proName String;
 
@@ -95,23 +95,42 @@ url: `/api/product/{proClass}/{proName}`
 
 ```
 
+## url: `/api/headerpics`
+
+@param:
+
+@return:
+```
+[
+    'dataUrl1',
+    'dataUrl2',
+    'dataUrl3',
+    'dataUrl4'
+]
+```
+
 ----
 
 # post
 
 ----
 
-url: `/api/product`
+## url: `/api/product`
 
 @param: product Object;
 
 @return:
 ```
-// 成功
-1
+成功返回1，出错返回-1
+```
 
-// 失败
--1
+## url: `/api/headerpics`
+
+@param: pics Array;
+
+@return
+```
+成功返回1，出错返回-1
 ```
 
 ----
@@ -124,15 +143,11 @@ url: `/api/product`
 
 ----
 
-url: `/api/product/{proClass}/{proName}`
+## url: `/api/product/{proClass}/{proName}`
 
 @param: ()
 
 @return:
 ```
-// 成功
-1
-
-// 失败
--1
+成功返回1，出错返回-1
 ```

@@ -87,6 +87,27 @@ exports.get = {
                 reject(-1)
             })
         })
+    },
+
+    // 返回轮播图数组
+    headerpic: () => {
+        return new Promise((resolve, reject) => {
+            gmodel('headerpics').find()
+            .then((docs) => {
+                if (docs[0]) {
+                    console.log(typeof docs[0].pics)
+                    resolve(docs[0].pics)
+                }
+                else {
+                    let arr = ['', '', '', '']
+                    resolve(arr)
+                }
+            })
+            .catch(e => {
+                log('get-headerpic-error', e)
+                reject(-1)
+            })
+        })
     }
 }
 
@@ -108,6 +129,30 @@ exports.post = {
             
         })
     },
+
+    // 上传主页轮播图
+    headerpic: (pics) => {
+        return new Promise((resolve, reject) => {
+            gmodel('headerpics').find()
+            .then((docs) => {
+                // 存在则更新
+                if (docs[0] && docs[0].pics) {
+                    docs[0].pics = pics
+                    docs[0].save()
+                }
+                // 不存在则新建
+                else {
+                    gmodel('headerpics').create({pics})
+                }
+                resolve(1)
+            })
+            .catch((e) => {
+                console.log(e)
+                log('post-headerpic-error: ', e)
+                resolve(-1)
+            })
+        })
+    }
 
 
 }
