@@ -95,7 +95,6 @@ exports.get = {
             gmodel('headerpics').find()
             .then((docs) => {
                 if (docs[0]) {
-                    console.log(typeof docs[0].pics)
                     resolve(docs[0].pics)
                 }
                 else {
