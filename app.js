@@ -7,10 +7,13 @@ const session = require('koa-session')
 const koaStatic = require('koa-static')
 
 app.use(function *(next) {
+    if (this.request.method === 'OPTIONS')
+        this.status = 200
     yield next
     this.set({
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS'
+        'Access-Control-Allow-Methods': '*',
+        'Access-Control-Allow-Headers': '*'
     })
 })
 
