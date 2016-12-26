@@ -1,0 +1,78 @@
+<div>
+    <img id='img1'></img>
+    <img id='img2'></img>
+    <img id='img3'></img>
+    <img id='img4'></img>
+</div>
+
+
+<div>
+    <input type='file' id='pic1'></input>
+    <input type='file' id='pic2'></input>
+    <input type='file' id='pic3'></input>
+    <input type='file' id='pic4'></input>
+</div>
+
+<button onClick='pushImg()'>push</button>
+<button onClick='getImg()'>get</button>
+
+<script src='../util.js'></script>
+
+<script>
+/*
+传入input 节点的dom 对象
+若该input 节点选择了文件，则返回文件的dataUrl
+若未选择文件，则返回空字符串
+*/
+const getFile = (domObj) => {
+    return new Promise((res, rej) => {
+        let img = domObj.files[0]
+        if (!img) {
+            return res('')
+        }
+        let fileReader = new FileReader()
+        fileReader.onload = (e) => {
+            res(e.target.result)
+        }
+        fileReader.readAsDataURL(img)
+    })
+}
+
+/* 
+上传图片
+ids 为input 节点的id
+*/
+const pushImg = () => {
+    let ids = ['pic1', 'pic2', 'pic3', 'pic4']
+
+    let doms = ids.map(value => document.getElementById(value)).filter(e => e)
+    let promises = doms.map(value => getFile(value))
+    Promise.all(promises).then(res => {
+        return fetch('POST', 'http://beim.site:2334/api/headerpic', res)
+    }).then(res => {
+        // TODO 对返回值res 进行处理
+        console.log(res)
+    })
+}
+
+/*
+获取图片
+ids 为img 节点的id
+*/
+const getImg = () => {
+    let ids = ['img1', 'img2', 'img3', 'img4']
+
+    let doms = ids.map(value => document.getElementById(value)).filter(e => e)
+    fetch('GET', 'http://beim.site:2334/api/headerpic').then(res => {
+        res = JSON.parse(res)
+        doms.forEach((value, index) => {
+            index = parseInt(index)
+            value.setAttribute('src', res[index])
+        })
+    })
+}
+
+</script>
+
+
+

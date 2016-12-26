@@ -12,11 +12,13 @@ const Schemas = {
         title: {type: String, unique: true},
         // 页面内容
         page: [
+            /*
             {
                 // 块样式类型
                 blockType: String,
                 content: Array
             }
+            */
         ]
     },
 
@@ -32,11 +34,14 @@ const Schemas = {
         briefPic: String,
         // 页面内容
         page: [
+
+            /*
             {
                 // 块样式类型
                 blockType: {type: String, required: true},
                 content: Array
             }
+            */
         ]
     },
 

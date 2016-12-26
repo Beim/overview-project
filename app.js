@@ -9,7 +9,8 @@ const koaStatic = require('koa-static')
 app.use(function *(next) {
     yield next
     this.set({
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS'
     })
 })
 
