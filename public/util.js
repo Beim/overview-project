@@ -15,12 +15,12 @@ const fetch = (method, url, data = null) => {
 
 /*
  * 成功返回1，失败返回-1
- * login('/auth/login', '123456').then(res => {
+ * login('123456', '/auth/islogin').then(res => {
  *  TODO...
  *  console.log(res)
  * })
  */
-const login = (url, key) => {
+let login = (key, url = '/auth/login') => {
     return new Promise((res, rej) => {
         fetch('POST', url, {key})
         .then(body => {
@@ -39,4 +39,4 @@ const login = (url, key) => {
  *  console.log(res)
  * })
  */
-const islogin = url => fetch('GET', url)
+let islogin = (url = '/auth/islogin') => fetch('GET', url)
