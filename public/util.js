@@ -15,7 +15,7 @@ const fetch = (method, url, data = null) => {
 
 /*
  * 成功返回1，失败返回-1
- * login('123456', '/auth/islogin').then(res => {
+ * login('123456', '/auth/login').then(res => {
  *  TODO...
  *  console.log(res)
  * })

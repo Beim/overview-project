@@ -31,6 +31,12 @@ router.get('/headerpic', function *(next) {
     this.body = pics
 })
 
+router.get('/overview/:title', function *(next) {
+    let title = this.params.title
+    let res = yield mongo.get.overview(title)
+    this.body = res
+})
+
 /*
  * POST
  */
@@ -44,6 +50,13 @@ router.post('/product', function *(next) {
 router.post('/headerpic', function *(next) {
     let pics = this.request.body
     let res = yield mongo.post.headerpic(pics)
+    this.body = res
+})
+
+router.post('/overview/:title', function *(next) {
+    let title = this.params.title
+    let page = this.request.body
+    let res = yield mongo.post.overview(title, page)
     this.body = res
 })
 

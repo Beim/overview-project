@@ -1,8 +1,6 @@
 # get
 
-## url: `/auth/islogin`
-
-@param: ()
+## url: /auth/islogin
 
 @return
 ```
@@ -12,7 +10,7 @@
 
 ----
 
-## url: `/api/sitemap`
+## url: /api/sitemap
 
 @param: ()
 
@@ -62,9 +60,7 @@
 
 ----
 
-## url: `/api/lineup/{proClass}`
-
-@param: ()
+## url: /api/lineup/{proClass}
 
 @return:
 ```
@@ -98,18 +94,14 @@
 
 ----
 
-## url: `/api/product/{proClass}/{proName}`
-
-@param: proClass String; proName String;
+## url: /api/product/{proClass}/{proName}
 
 @return:
 ```
 
 ```
 
-## url: `/api/headerpics`
-
-@param:
+## url: /api/headerpics
 
 @return:
 ```
@@ -123,59 +115,14 @@
 
 ----
 
-# post
-
-----
-
-## url: `/auth/login`
-
-@param: data Object;
-```
-data = {key: '123456'}
-```
+## url: /api/overview/{title}
 
 @return:
 ```
-{
-    ok: 成功为true，失败false
-}
-```
+成功返回
+[
+    ...
+]
 
-----
-
-## url: `/api/product`
-
-@param: product Object;
-
-@return:
-```
-成功返回1，出错返回-1
-```
-
-## url: `/api/headerpics`
-
-@param: pics Array;
-
-@return
-```
-成功返回1，出错返回-1
-```
-
-----
-
-# put
-
-----
-
-# delete
-
-----
-
-## url: `/api/product/{proClass}/{proName}`
-
-@param: ()
-
-@return:
-```
-成功返回1，出错返回-1
+错误返回-1
 ```

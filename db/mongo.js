@@ -50,7 +50,6 @@ exports.get = {
         return new Promise((resolve, reject) => {
             let p1 = gmodel('overviews').find({}, {title: 1, _id: 0})
             let p2 = gmodel('products').find({}, {proClass: 1, proSubClass: 1, proName: 1, _id: 0})
-
             Promise.all([p1, p2])
             .then(([docs1, docs2]) => {
                 let products = {}
@@ -70,7 +69,7 @@ exports.get = {
             })
             .catch((e) => {
                 log('get-sitemap-error', e)
-                reject(-1)
+                resolve(-1)
             })
         })
     },
@@ -84,12 +83,13 @@ exports.get = {
             })
             .catch((e) => {
                 log('get-productLineup-error', e)
-                reject(-1)
+                resolve(-1)
             })
         })
     },
 
     // 返回轮播图数组
+    // 若不存在则返回4个元素为空字符串的数组
     headerpic: () => {
         return new Promise((resolve, reject) => {
             gmodel('headerpics').find()
@@ -104,7 +104,24 @@ exports.get = {
             })
             .catch(e => {
                 log('get-headerpic-error', e)
-                reject(-1)
+                resolve(-1)
+            })
+        })
+    },
+
+    // 返回overview 的title 对应的page 信息
+    overview: (title) => {
+        return new Promise((resolve, reject) => {
+            gmodel('overviews').find({title}, 'title page')
+            .then((docs) => {
+                if (docs[0])
+                    resolve(docs[0].page)
+                else
+                    resolve(-1)
+            })
+            .catch((e) => {
+                log('get-overview-error', e)
+                resolve(-1)
             })
         })
     }
@@ -153,6 +170,27 @@ exports.post = {
                 resolve(-1)
             })
         })
+    },
+
+    // 上传/更新 title对应的page
+    overview: (title, page) => {
+        return new Promise((resolve, reject) => {
+            gmodel('overviews').find({title})
+            .then(docs => {
+                if (docs[0] && docs[0].page) {
+                    docs[0].page = page
+                    docs[0].save()
+                }
+                else {
+                    gmodel('overviews').create({title, page})
+                }
+                resolve(1)
+            })
+            .catch(e => {
+                log('post-overview-error: ', e)
+                resolve(-1)
+            })
+        })
     }
 
 
@@ -193,13 +231,7 @@ let products = [
         area: 'Brazil',
         briefPic: 'dataURL',
         page: [
-            {
-                blockType: 0,
-                content: [
-                    'aaa',
-                    'bbb'
-                ]
-            }
+
         ]
     },
     {
@@ -209,13 +241,6 @@ let products = [
         area: 'Brazil',
         briefPic: 'dataURL',
         page: [
-            {
-                blockType: 0,
-                content: [
-                    'aaa',
-                    'bbb'
-                ]
-            }
         ]
     },
     {
@@ -225,13 +250,6 @@ let products = [
         area: 'Canada',
         briefPic: 'dataURL',
         page: [
-            {
-                blockType: 0,
-                content: [
-                    'aaa',
-                    'bbb'
-                ]
-            }
         ]
     },
     {
@@ -241,13 +259,6 @@ let products = [
         area: 'Mexico',
         briefPic: 'dataURL',
         page: [
-            {
-                blockType: 0,
-                content: [
-                    'aaa',
-                    'bbb'
-                ]
-            }
         ]
     },
 ]
@@ -256,49 +267,21 @@ let overviews = [
     {
         title: 'company Overview',
         page: [
-            {
-                blockType: 0,
-                content: [
-                    'aaaaaaa',
-                    'bbbbbb'
-                ]
-            }
         ]
     },
     {
         title: 'Message',
         page: [
-            {
-                blockType: 0,
-                content: [
-                    'aaaaaaa',
-                    'bbbbbb'
-                ]
-            }
         ]
     },
     {
         title: 'Global network',
         page: [
-            {
-                blockType: 0,
-                content: [
-                    'aaaaaaa',
-                    'bbbbbb'
-                ]
-            }
         ]
     },
     {
         title: 'Our business networks',
         page: [
-            {
-                blockType: 0,
-                content: [
-                    'aaaaaaa',
-                    'bbbbbb'
-                ]
-            }
         ]
     },
 ]
