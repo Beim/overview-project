@@ -1,5 +1,17 @@
 # get
 
+## url: `/auth/islogin`
+
+@param: ()
+
+@return
+```
+已登陆返回1
+未登陆返回-1
+```
+
+----
+
 ## url: `/api/sitemap`
 
 @param: ()
@@ -112,6 +124,22 @@
 ----
 
 # post
+
+----
+
+## url: `/auth/login`
+
+@param: data Object;
+```
+data = {key: '123456'}
+```
+
+@return:
+```
+{
+    ok: 成功为true，失败false
+}
+```
 
 ----
 
