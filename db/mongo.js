@@ -136,7 +136,9 @@ exports.post = {
             .then((docs) => {
                 // 存在则更新
                 if (docs[0] && docs[0].pics) {
-                    docs[0].pics = pics
+                    pics.forEach((v, i) => {
+                        if (pics[i]) docs[0].pics = pics[i]
+                    })
                     docs[0].save()
                 }
                 // 不存在则新建
