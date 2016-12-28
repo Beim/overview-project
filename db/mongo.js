@@ -154,7 +154,8 @@ exports.post = {
                 // 存在则更新
                 if (docs[0] && docs[0].pics) {
                     pics.forEach((v, i) => {
-                        if (pics[i]) docs[0].pics = pics[i]
+                        if (pics[i]) docs[0].pics[i] = pics[i]
+                        
                     })
                     docs[0].save()
                 }
