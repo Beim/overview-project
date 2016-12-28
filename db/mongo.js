@@ -153,17 +153,26 @@ exports.post = {
             .then((docs) => {
                 // 存在则更新
                 if (docs[0] && docs[0].pics) {
+                    let old_pics = JSON.parse(JSON.stringify(docs[0].pics))
                     pics.forEach((v, i) => {
-                        if (pics[i]) docs[0].pics[i] = pics[i]
-                        
+                        if (pics[i]) 
+                            old_pics[i] = pics[i]
                     })
-                    docs[0].save()
+                    docs[0].pics = old_pics
+                    docs[0].save().then((r) => {
+                        resolve(1)
+                    }).catch(e => {
+                        resolve(-1)
+                    })
                 }
                 // 不存在则新建
                 else {
-                    gmodel('headerpics').create({pics})
+                    gmodel('headerpics').create({pics}).then(r => {
+                        resolve(1)
+                    }).catch(e => {
+                        resolve(-1)
+                    })
                 }
-                resolve(1)
             })
             .catch((e) => {
                 console.log(e)
