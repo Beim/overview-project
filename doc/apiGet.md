@@ -10,6 +10,31 @@
 
 ----
 
+## url: /api/product/{proName}
+
+@return
+```
+成功返回
+[
+  {
+    "proClass": "product1",
+    "proSubClass": "product1",
+    "proName": "productA",
+    "area": "BZ",
+    "briefPic": "dataURL",
+    "page": [
+      1,
+      2,
+      3
+    ]
+  }
+]
+不存在返回空数组[]
+错误返回-1
+```
+
+----
+
 ## url: /api/sitemap
 
 @param: ()
@@ -37,44 +62,24 @@
 
 @return:
 ```
+成功返回
 [
-    {
-        "_id": "5838142f5c56645911b0f4b8",
-        "proSubClass": "Marine Product",
-        "proName": "School Whiting",
-        "briefPic": "dataURL"
-    },
-    {
-        "_id": "5838142f5c56645911b0f4ba",
-        "proSubClass": "Marine Product",
-        "proName": "King Crab",
-        "briefPic": "dataURL"
-    },
-    {
-        "_id": "5838142f5c56645911b0f4bc",
-        "proSubClass": "Shrimp",
-        "proName": "wild brown shrimp",
-        "briefPic": "dataURL"
-    },
-    {
-        "_id": "5838142f5c56645911b0f4be",
-        "proSubClass": "Shrimp",
-        "proName": "magadas rouge premium",
-        "briefPic": "dataURL"
-    }
+  {
+    "proName": "productB",
+    "briefPic": "dataURL"
+  },
+  {
+    "proName": "productA",
+    "briefPic": "dataURL"
+  }
 ]
+无数据为空数组
+失败返回-1
 ```
 
 ----
 
-## url: /api/product/{proClass}/{proName}
-
-@return:
-```
-
-```
-
-## url: /api/headerpics
+## url: /api/headerpic
 
 @return:
 ```

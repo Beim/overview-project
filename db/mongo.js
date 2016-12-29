@@ -36,7 +36,7 @@ const gmodel = (name) => {
 
 const log = (...args) => {
     let logfile = path.resolve(__dirname, '../log/mongo-log.txt')
-    let date = new Date().toLocaleTimeString()
+    let date = new Date().toLocaleString()
     let str = args.join('\n')
     let msg = `${date}\n${str}\n\n`
     fs.writeFile(logfile, msg, {flag: 'a'}, (err) => {
@@ -62,7 +62,7 @@ exports.get = {
     // 返回lineup界面需要的产品信息
     productLineup: (proClass) => {
         return new Promise((resolve, reject) => {
-            gmodel('products').find({proClass}, 'proSubClass proName briefPic')
+            gmodel('products').find({proClass}, {proName: 1, briefPic: 1, _id: 0})
             .then((docs) => {
                 resolve(docs)
             })
@@ -109,6 +109,19 @@ exports.get = {
                 resolve(-1)
             })
         })
+    },
+
+    product: (proName) => {
+        return new Promise((resolve, reject) => {
+            gmodel('products').find({proName}, {_id: 0, __v: 0})
+            .then(docs => {
+                resolve(docs)
+            })
+            .catch(e => {
+                log('get-product-error', e)
+                resolve(-1)
+            })
+        })
     }
 }
 
@@ -147,6 +160,7 @@ exports.post = {
                     docs[0].save().then((r) => {
                         resolve(1)
                     }).catch(e => {
+                        log('post-headerpic-savedoc-error', e)
                         resolve(-1)
                     })
                 }
@@ -155,12 +169,12 @@ exports.post = {
                     gmodel('headerpics').create({pics}).then(r => {
                         resolve(1)
                     }).catch(e => {
+                        log('post-headerpic-create-error', e)
                         resolve(-1)
                     })
                 }
             })
             .catch((e) => {
-                console.log(e)
                 log('post-headerpic-error: ', e)
                 resolve(-1)
             })
@@ -193,7 +207,29 @@ exports.post = {
 
 // 更新内容
 exports.put = {
-    
+    // 更新产品
+    product: (limit, pro) => {
+        return new Promise((resolve, reject) => {
+            gmodel('products').find(limit)
+            .then(docs => {
+                if (docs[0]) {
+                    for (let i in pro) {
+                        docs[0][i] = pro[i]
+                    }
+                    docs[0].save()
+                    resolve(1)
+                }
+                else {
+                    log('put-product-find-error', JSON.stringify(limit))
+                    resolve(-1)
+                }
+            })
+            .catch(e => {
+                log('put-product-error', e)
+                resolve(-1)
+            })
+        })
+    }
 }
 
 // 删除内容
@@ -207,7 +243,7 @@ exports.del = {
                 // resolve(docs)
             })
             .catch((e) => {
-                log('del-product-log', e)
+                log('del-product-error', e)
                 resolve(-1)
             })
         })

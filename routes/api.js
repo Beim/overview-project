@@ -37,9 +37,10 @@ router.get('/lineup/:proClass', function *(next) {
     this.body = docs
 })
 
-router.get('/product/:proClass/:proName', function *(next) {
-    let proClass = this.params.proClass
+router.get('/product/:proName', function *(next) {
     let proName = this.params.proName
+    let res = yield mongo.get.product(proName)
+    this.body = res ? res : -1
 })
 
 router.get('/headerpic', function *(next) {
@@ -80,17 +81,20 @@ router.post('/overview/:title', function *(next) {
  * PUT
  */
 
-router.put('/product', function *(next) {
+router.put('/product/:proName', function *(next) {
+    let proName = this.params.proName
     let pro = this.request.body
+    let res = yield mongo.put.product({proName}, pro)
+    this.body = res
 })
 
 /*
  * DELETE
  */
 
-router.delete('/product/:proClass/:proName', function *(next) {
+router.delete('/product/:proName', function *(next) {
     let {proClass, proName} = this.params
-    let res = yield mongo.del.product({proClass, proName})
+    let res = yield mongo.del.product({proName})
     this.body = res
 })
 

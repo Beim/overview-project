@@ -24,10 +24,10 @@ data = {key: '123456'}
 
 @return:
 ```
-成功返回1，出错返回-1
+成功返回1，出错返回-1(可能原因：proName 重复)
 ```
 
-## url: /api/headerpics
+## url: /api/headerpic
 
 @param: pics Array;
 
@@ -49,17 +49,22 @@ data = {key: '123456'}
 
 # put
 
+## url: /api/product/{proName}
+
+@param: pro Object
+
+@return
+```
+成功返回1；出错返回-1(可能原因：proName 不存在)
+```
+
 ----
 
 # delete
 
-----
+## url: /api/product/{proName}
 
-## url: /api/product/{proClass}/{proName}
-
-@param:
-
-@return:
+@return
 ```
-成功返回1，出错返回-1
+成功返回1；出错返回-1
 ```
