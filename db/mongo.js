@@ -48,6 +48,16 @@ exports.get = {
     // 返回sitemap所需要的标题信息
     sitemap: () => {
         return new Promise((resolve, reject) => {
+            gmodel('products').find({}, {proClass: 1, proName: 1, _id: 0})
+            .then(docs => {
+                resolve(docs)
+            })
+            .catch(e => {
+                log('get-sitemap-error', e)
+                resolve(-1)
+            })
+
+            /*
             let p1 = gmodel('overviews').find({}, {title: 1, _id: 0})
             let p2 = gmodel('products').find({}, {proClass: 1, proSubClass: 1, proName: 1, _id: 0})
             Promise.all([p1, p2])
@@ -71,6 +81,7 @@ exports.get = {
                 log('get-sitemap-error', e)
                 resolve(-1)
             })
+            */
         })
     },
 
@@ -235,40 +246,63 @@ exports.del = {
 
 let products = [
     {
-        proClass: 'Marine Products',
-        proSubClass: 'Marine Product',
-        proName: 'School Whiting',
-        area: 'Brazil',
+        proClass: 'product1',
+        proSubClass: 'product1',
+        proName: 'productB',
+        area: 'BZ',
         briefPic: 'dataURL',
         page: [
-
+            1,
+            2,
+            3
         ]
     },
     {
-        proClass: 'Marine Products',
-        proSubClass: 'Marine Product',
-        proName: 'King Crab',
-        area: 'Brazil',
+        proClass: 'product1',
+        proSubClass: 'product1',
+        proName: 'productA',
+        area: 'BZ',
         briefPic: 'dataURL',
         page: [
+            1,
+            2,
+            3
         ]
     },
     {
-        proClass: 'Marine Products',
-        proSubClass: 'Shrimp',
-        proName: 'wild brown shrimp',
-        area: 'Canada',
+        proClass: 'product2',
+        proSubClass: 'product2',
+        proName: 'productC',
+        area: 'BZ',
         briefPic: 'dataURL',
         page: [
+            1,
+            2,
+            3
         ]
     },
     {
-        proClass: 'Marine Products',
-        proSubClass: 'Shrimp',
-        proName: 'magadas rouge premium',
-        area: 'Mexico',
+        proClass: 'product2',
+        proSubClass: 'product2',
+        proName: 'productD',
+        area: 'BZ',
         briefPic: 'dataURL',
         page: [
+            1,
+            2,
+            3
+        ]
+    },
+    {
+        proClass: 'product3',
+        proSubClass: 'product3',
+        proName: 'productE',
+        area: 'BZ',
+        briefPic: 'dataURL',
+        page: [
+            1,
+            2,
+            3
         ]
     },
 ]

@@ -12,7 +12,23 @@ router.get('/', function *(next) {
 })
 
 router.get('/sitemap', function *(next) {
-    this.body = yield mongo.get.sitemap()
+    let data = yield mongo.get.sitemap()
+    if (data === -1) {
+        this.body = -1
+    }
+    else {
+        let res = {}
+        for (let item of data) {
+            if (res[item.proClass]) {
+                res[item.proClass].push(item.proName)
+            }
+            else {
+                res[item.proClass] = [item.proName]
+            }
+        }
+        this.body = res
+        
+    }
 })
 
 router.get('/lineup/:proClass', function *(next) {

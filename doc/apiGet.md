@@ -17,44 +17,14 @@
 @return:
 ```
 {
-    "overviews": [
-        {
-            "title": "company Overview"
-        },
-        {
-            "title": "Message"
-        },
-        {
-            "title": "Global network"
-        },
-        {
-            "title": "Our business networks"
-        }
-    ],
-    "products": {
-        "Marine Products": [
-            {
-                "proClass": "Marine Products",
-                "proSubClass": "Marine Product",
-                "proName": "School Whiting"
-            },
-            {
-                "proClass": "Marine Products",
-                "proSubClass": "Marine Product",
-                "proName": "King Crab"
-            },
-            {
-                "proClass": "Marine Products",
-                "proSubClass": "Shrimp",
-                "proName": "wild brown shrimp"
-            },
-            {
-                "proClass": "Marine Products",
-                "proSubClass": "Shrimp",
-                "proName": "magadas rouge premium"
-            }
-        ]
-    }
+  "product1": [
+    "productB",
+    "productA"
+  ],
+  "product2": [
+    "productC",
+    "productD"
+  ]
 }
 ```
 
