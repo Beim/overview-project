@@ -16,6 +16,7 @@
 
 @return:
 ```
+成功返回Object：
 {
   "product1": [
     "productB",
@@ -26,6 +27,8 @@
     "productD"
   ]
 }
+
+错误返回-1
 ```
 
 ----
@@ -75,12 +78,14 @@
 
 @return:
 ```
+成功返回Array：
 [
     'dataUrl1',
     'dataUrl2',
     'dataUrl3',
     'dataUrl4'
 ]
+错误返回-1
 ```
 
 ----
@@ -89,7 +94,7 @@
 
 @return:
 ```
-成功返回
+成功返回Array：
 [
     ...
 ]

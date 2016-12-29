@@ -56,32 +56,6 @@ exports.get = {
                 log('get-sitemap-error', e)
                 resolve(-1)
             })
-
-            /*
-            let p1 = gmodel('overviews').find({}, {title: 1, _id: 0})
-            let p2 = gmodel('products').find({}, {proClass: 1, proSubClass: 1, proName: 1, _id: 0})
-            Promise.all([p1, p2])
-            .then(([docs1, docs2]) => {
-                let products = {}
-                for (let item of docs2) {
-                    if (!products[item.proClass]) {
-                        products[item.proClass] = [item]
-                    }
-                    else {
-                        products[item.proClass].push(item)
-                    }
-                }
-                let result = {
-                    overviews: docs1,
-                    products
-                }
-                resolve(result)
-            })
-            .catch((e) => {
-                log('get-sitemap-error', e)
-                resolve(-1)
-            })
-            */
         })
     },
 
