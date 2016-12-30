@@ -62,7 +62,7 @@ exports.get = {
     // 返回lineup界面需要的产品信息
     productLineup: (proClass) => {
         return new Promise((resolve, reject) => {
-            gmodel('products').find({proClass}, {_id: 0})
+            gmodel('products').find({proClass}, {proClass: 0, proSubClass: 0, _id: 0, __v: 0})
             .then((docs) => {
                 resolve(docs)
             })

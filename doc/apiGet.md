@@ -66,11 +66,23 @@
 [
   {
     "proName": "productB",
-    "briefPic": "dataURL"
+    "area": "BZ",
+    "briefPic": "dataURL",
+    "page": [
+      1,
+      2,
+      3
+    ]
   },
   {
     "proName": "productA",
-    "briefPic": "dataURL"
+    "area": "BZ",
+    "briefPic": "dataURL",
+    "page": [
+      1,
+      2,
+      3
+    ]
   }
 ]
 无数据为空数组
