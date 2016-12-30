@@ -54,6 +54,11 @@ router.get('/overview/:title', function *(next) {
     this.body = res
 })
 
+router.get('/worldmap', function *(next) {
+    let res = yield mongo.get.worldmap()
+    this.body = res
+})
+
 /*
  * POST
  */

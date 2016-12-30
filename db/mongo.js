@@ -122,6 +122,19 @@ exports.get = {
                 resolve(-1)
             })
         })
+    },
+
+    worldmap: () => {
+        return new Promise((resolve, reject) => {
+            gmodel('products').find({}, {proClass: 1, proName: 1, briefPic: 1, area: 1, _id: 0})
+            .then(docs => {
+                resolve(docs)
+            })
+            .catch(e => {
+                log('get-worldmap-error', e)
+                resolve(-1)
+            })
+        })
     }
 }
 

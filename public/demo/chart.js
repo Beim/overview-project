@@ -1,93 +1,183 @@
-let myChart = echarts.init(document.getElementById('main'))
-const colorConfig = {
-    titleColor: '#fff',
-    pointColor: '#eea638',
-    pointSize: [6, 60],
-    pointValue: {min: 1, max: 5}
+const userConfig = {
+    titleColor: 'blue',
+    pointColor: 'red',
+    specialPointColor: 'white',
+    pointSize: [30, 60],
+    pointValue: {min: 1, max: 5},
+    backgroundColor: 'yellow',
+    text: '111Wrold Population',
+    subtext: '111From Gapminder',
+    areaColor: 'brown',
+    borderColor: 'black',
+    pointerAreaColor: 'lightblue',
 }
 
-let latlong = mapConfig.latlong
-let mapData = [
-    // {code: mapConfig.code['China'], name: 'product 1', value: 3, color: '#eea638'},
-    {code: mapConfig.code['Russia'], name: 'product 1', value: 3},
-]
 
-mapData = mapData.filter((elem) => {
-    if (!elem.code)
-        console.log(`country name error, name: ${elem.name}`)
-    if (!elem.color)
-        elem.color = colorConfig.pointColor
-    return elem.code
-})
+let myChart = echarts.init(document.getElementById('main'))
+mapConfig.cton = {}
+for (let i in mapConfig.code) {
+    mapConfig.cton[mapConfig.code[i]] = i
+}
 
-let option = {
-    backgroundColor: '#404a59',
-    title : {
-        text: '111World Population (2011)',
-        subtext: '111From Gapminder',
-        left: 'center',
-        top: 'top',
-        textStyle: {
-            color: colorConfig.titleColor
+const makeMap = (codes) => {
+    let code = {}
+    for (let item of codes) {
+        if (code[item.code]) {
+            code[item.code].count++
         }
-    },
-    tooltip : {
-        trigger: 'item',
-        formatter: params => params.name
-    },
-    visualMap: {
-        show: false,
-        min: colorConfig.pointValue.min,
-        max: colorConfig.pointValue.max,
-        inRange: {
-            symbolSize: colorConfig.pointSize
+        else {
+            code[item.code] = {count: 1}
         }
-    },
-    geo: {
-        name: 'World Population (2010)',
-        type: 'map',
-        map: 'world',
-        roam: true,
-        label: {
-            emphasis: {
-                show: false
+        if (!item.defaultColor) {
+            code[item.code].color = userConfig.specialPointColor
+        }
+    }
+    let mapData = []
+    for (let i in code) {
+        mapData.push({
+            code: i,
+            name: mapConfig.cton[i],
+            value: code[i].count,
+            color: code[i].color ? code[i].color : userConfig.pointColor
+        })
+    }
+    return mapData
+}
+
+const makeOption = (mapData) => {
+    const colorConfig = {
+        titleColor: userConfig.titleColor,
+        pointColor: userConfig.pointColor,
+        pointSize: userConfig.pointSize,
+        pointValue: userConfig.pointValue
+    }
+    
+    let latlong = mapConfig.latlong
+    
+    mapData = mapData.filter((elem) => {
+        if (!elem.code)
+            console.log(`country name error, name: ${elem.name}`)
+        if (!elem.color)
+            elem.color = colorConfig.pointColor
+        return elem.code
+    })
+    
+    let option = {
+        backgroundColor: userConfig.backgroundColor,
+        title : {
+            text: userConfig.text,
+            subtext: userConfig.subtext,
+            left: 'center',
+            top: 'top',
+            textStyle: {
+                color: colorConfig.titleColor
             }
         },
-        itemStyle: {
-            normal: {
-                areaColor: '#323c48',
-                borderColor: '#111'
-            },
-            emphasis: {
-                areaColor: '#2a333d'
+        tooltip : {
+            trigger: 'item',
+            formatter: params => params.name
+        },
+        visualMap: {
+            show: false,
+            min: colorConfig.pointValue.min,
+            max: colorConfig.pointValue.max,
+            inRange: {
+                symbolSize: colorConfig.pointSize
             }
-        }
-    },
-    series : [
-        {
-            type: 'scatter',
-            coordinateSystem: 'geo',
-            data: mapData.map(function (itemOpt) {
-                return {
-                    name: itemOpt.name,
-                    value: [
-                        latlong[itemOpt.code].longitude,
-                        latlong[itemOpt.code].latitude,
-                        itemOpt.value
-                    ],
-                    itemStyle: {
-                        normal: {
-                            color: itemOpt.color
+        },
+        geo: {
+            name: 'World Population (2010)',
+            type: 'map',
+            map: 'world',
+            roam: true,
+            label: {
+                emphasis: {
+                    show: false
+                }
+            },
+            itemStyle: {
+                normal: {
+                    areaColor: userConfig.areaColor,
+                    borderColor: userConfig.borderColor
+                },
+                emphasis: {
+                    areaColor: userConfig.pointerAreaColor
+                }
+            }
+        },
+        series : [
+            {
+                type: 'scatter',
+                coordinateSystem: 'geo',
+                data: mapData.map(function (itemOpt) {
+                    return {
+                        name: itemOpt.name,
+                        value: [
+                            latlong[itemOpt.code].longitude,
+                            latlong[itemOpt.code].latitude,
+                            itemOpt.value
+                        ],
+                        itemStyle: {
+                            normal: {
+                                color: itemOpt.color
+                            }
                         }
-                    }
-                };
-            })
-        }
-    ]
-};
+                    };
+                })
+            }
+        ]
+    };
+    return option
+}
 
-myChart.setOption(option)
+/*
+ * 传入地区信息，更新地图
+ * @param codes Array
+ */
+const makeChart = (codes) => {
+    let mapData = makeMap(codes)
+    myChart.setOption(makeOption(mapData))
+}
+
+makeChart([])
+
+/*
 myChart.on('click', (params) => {
     alert(params.name)
     console.log(params)
 })
+
+setTimeout(() => {
+    let codes = [
+        {
+            code: 'CN',
+            defaultColor: 0
+        },
+        {
+            code: 'CN',
+            defaultColor: 1
+        },
+        {
+            code: 'RU',
+            defaultColor: 1
+        },
+        {
+            code: 'AF',
+            defaultColor: 1
+        },
+        {
+            code: 'AF',
+            defaultColor: 1
+        },
+        {
+            code: 'AF',
+            defaultColor: 1
+        },
+        {
+            code: 'AF',
+            defaultColor: 1
+        },
+    ]
+    makeChart(codes)
+}, 1000)
+*/

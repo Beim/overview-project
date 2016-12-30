@@ -118,3 +118,33 @@
 
 错误返回-1
 ```
+
+----
+
+## url: /api/worldmap
+
+@return
+```
+成功返回数组
+[
+  {
+    "proClass": "product1",
+    "proName": "productB",
+    "area": "BZ",
+    "briefPic": "dataURL"
+  },
+  {
+    "proClass": "product1",
+    "proName": "productA",
+    "area": "BZ",
+    "briefPic": "dataURL"
+  },
+  {
+    "proClass": "product3",
+    "proName": "productE",
+    "area": "BZ",
+    "briefPic": "dataURL"
+  }
+]
+错误返回-1
+```
