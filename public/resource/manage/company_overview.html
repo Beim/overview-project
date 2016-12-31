@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>后台管理</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/datepicker3.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<h4 style="color:white;">后台管理</h4>
+			</div>
+		</div><!-- /.container-fluid -->
+	</nav>
+		
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<ul class="nav menu">
+			<li  class="parent active ">
+				<a href="index.html">
+					<span class="glyphicon glyphicon-list"></span> 主页 <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span> 
+				</a>
+				<ul class="children collapse in" id="sub-item-1">
+					<li>
+						<a class="" href="index.html">
+							<span class="glyphicon glyphicon-share-alt"></span> 主页内容
+						</a>
+					</li>
+					<li>
+						<a class="" href="company_overview.html">
+							<span class="glyphicon glyphicon-share-alt"></span> 公司概况
+						</a>
+					</li>
+					<li>
+						<a class="" href="message.html">
+							<span class="glyphicon glyphicon-share-alt"></span> 公司理念
+						</a>
+					</li>
+					<li>
+						<a class="" href="product1_overview.html">
+							<span class="glyphicon glyphicon-share-alt"></span> 水产品简介
+						</a>
+					</li>
+					<li>
+						<a class="" href="product2_overview.html">
+							<span class="glyphicon glyphicon-share-alt"></span> 畜产品简介
+						</a>
+					</li>
+				</ul>
+			</li>
+
+			<li><a href="product1.html"><span class="glyphicon glyphicon-th"></span> 水产品</a></li>
+			<li><a href="product2.html"><span class="glyphicon glyphicon-stats"></span> 畜产品</a></li>
+
+			
+		</ul>	
+	</div>
+		
+	<!--/.main-->
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<div style="width:800px;" class="alert alert-danger hide" id="wrong">修改出现了错误</div>
+			<h3 class=" " style="font-weight:bold;margin-left:200px;margin-top:50px;">公司概况内容修改</h3>
+			<div class="col-xs-6" style="margin-left:50px;">
+				<div style="margin-top:10px;" class="input-group">
+					<span class="input-group-addon">公司名称</span>
+					<input type="text" id="text1" placeholder="请输入公司名称" required="required" class="form-control" >
+				</div>
+				<div style="margin-top:10px;" class="input-group">
+					<span class="input-group-addon">公司董事</span>
+					<input type="text" id="text2" placeholder="请输入董事长名字" required="required" class="form-control" >
+				</div>
+				<div style="margin-top:10px;" class="input-group">
+					<span class="input-group-addon">公司总部</span>
+					<input type="text" id="text3" placeholder="请输入公司总部地址" required="required" class="form-control" >
+				</div>
+				<div style="margin-top:10px;" class="input-group">
+					<span class="input-group-addon">成立时间</span>
+					<input type="text" id="text4" placeholder="请输入成立时间" required="required" class="form-control" >
+				</div>
+				<div style="margin-top:10px;" class="input-group">
+					<span class="input-group-addon">公司资产</span>
+					<input type="text" id="text5" placeholder="请输入公司资产" required="required" class="form-control" >
+				</div>
+				
+			</div>
+			<div style="" class="col-xs-4">
+				<img id="img" src="" style="border:1px #ccc solid;height:233px;width:200px;">
+				<input type="file" id="pic" onchange="changepic();">
+			</div>
+			<button onclick="upload();" class="btn btn-primary col-xs-offset-4">上传</button>
+		</div>
+	</div><!--/.main-->
+
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/util.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			fetch('GET',beim +"/api/overview/overview").then(res =>{
+				res = JSON.parse(res)
+					$("#text1").val(res[0]);
+					$("#text2").val(res[1]);
+					$("#text3").val(res[2]);
+					$("#text4").val(res[3]);
+					$("#text5").val(res[4]);
+					$("#img").attr('src',res[5]);
+			})
+			islogin().then(res => {
+				if(res == -1){
+					window.location.href="login.html"
+				}
+			})
+		})
+
+		const getFile = (domObj) => {
+			return new Promise((res, rej) => {
+				let img = domObj.files[0]
+				if (!img) {
+					return res('')
+				}
+				let fileReader = new FileReader()
+				fileReader.onload = (e) => {
+					res(e.target.result)
+				}
+				fileReader.readAsDataURL(img)
+			})
+		}
+		var upload = function(){
+			let text1 = $("#text1").val();
+			let text2 = $("#text2").val();
+			let text3 = $("#text3").val();
+			let text4 = $("#text4").val();
+			let text5 = $("#text5").val();
+			let pic = document.getElementById("pic");
+			getFile(pic).then(e =>{
+				let text6 = e;
+				if(!text6){
+					let picsrc = $("#img")[0].src;
+					arr = [text1,text2,text3,text4,text5,picsrc];
+				}
+				else{
+					arr = [text1,text2,text3,text4,text5,text6];
+				}
+				return arr
+				//fetch('POST',beim + )
+			}).then(data => {
+			    return fetch('POST', beim +'/api/overview/overview', data)
+			}).then(e =>{
+				if(e ==1){
+					location.reload() 
+				}
+				else{
+					$("#wrong").removeClass("hide");
+				}
+			})
+		}
+	</script>
+		
+	<script type="text/javascript">
+		var changepic = function(){
+			let pic = document.getElementById("pic");
+			getFile(pic).then(e =>{
+				let text6 = e;
+				$("#img").attr("src",text6)
+				//fetch('POST',beim + )
+			})
+		}
+	</script>
+	<script>
+		!function ($) {
+			$(document).on("click","ul.nav li.parent > a > span.icon", function(){		  
+				$(this).find('em:first').toggleClass("glyphicon-minus");	  
+			}); 
+			$(".sidebar span.icon").find('em:first').addClass("glyphicon-minus");
+		}(window.jQuery);
+
+		$(window).on('resize', function () {
+		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+		})
+		$(window).on('resize', function () {
+		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+		})
+	</script>	
+</body>
+
+</html>

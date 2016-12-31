@@ -1,0 +1,166 @@
+body a{
+	text-decoration: none;
+}
+body a:hover{
+	text-decoration: none;
+}
+body{
+	font-family: "微软雅黑";
+}
+.header,.content,.footer{
+	width:900px;
+	margin:0 auto;
+	margin-top: 5px;
+}
+
+/**header部分**/
+.header{
+	margin-top: 20px;
+}
+.logo{
+	font-family: "微软雅黑";
+	font-weight: 800;
+	height:80px;
+	line-height: 80px;
+	font-size: 25px;
+}
+.nav{
+	height:80px;
+	line-height: 80px;
+	display:inline-block;
+	margin-left: 10px;
+}
+.nav span{
+	height:20px;
+	line-height: 20px;
+	font-size: 16px;
+	padding:5px 10px 5px 10px;
+	color:white;
+	background-color: #FF6347;
+	border-radius: 5px;
+}
+
+/**content部分**/
+#carousel{
+	border-radius: 5px;
+}
+.carousel-img{
+	border-radius: 5px;
+}
+.carousel-control{
+	border-radius: 5px;
+}
+
+.main{
+	min-height: 900px;
+	width:900px;
+	background-color: #F5F5DC;
+	margin-top: 90px;
+	padding-bottom: 30px;
+	border-radius: 10px;
+	position: relative;
+}
+.moveup{
+	margin-top:27px;
+}
+.ad1{
+	height:285px;
+	width:600px;
+	position: absolute;
+	margin: 30px 50px 0px 50px;
+	border:1px solid #ccc;
+	background-color: #fff;
+}
+.ad_title{
+	height:30px;
+	line-height: 30px;
+	width:598px;
+	background-color: #20B2AA;
+	box-shadow: 0px 5px 10px #20B2AA;
+}
+.ad_title p{
+	font-size: 15px;
+	color:white;
+	font-weight: bold;
+	margin-left: 20px;
+}
+.ad_1_1{
+	position: absolute;
+ 	margin-top: 20px;
+ 	margin-left: 20px;
+}
+.ad_1_2{
+	position: absolute;
+	margin-top: 20px;
+	margin-left: 305px;
+}
+.ad_1_3{
+	position: absolute;
+	margin:145px;
+	margin-left: 20px;
+}
+.ad2{
+	height:500px;
+	width:600px;
+	position: absolute;
+	margin: 350px 50px 0px 50px;
+	border:1px solid #ccc;
+	background-color: #fff;
+}
+.ad2_top{
+	height:275px;
+	width:598px;
+	padding-top: 10px;
+	padding-left: 20px;
+}
+.ad2_top_left{
+	float:left;
+	height:250px;
+	width:200px;
+	padding-top: 20px;
+}
+.ad2_top_right{
+	float:left;
+	margin-left: 20px;
+	height:250px;
+	width:300px;
+	padding-top: 20px;
+}
+.ad2_top_left img{
+	height:200px;
+	width:175px;
+}
+.ad2_top_right_nav{
+	border-bottom: 3px #ccc dotted;
+	color:#878787;
+	margin-bottom: 10px;
+}
+.ad2_top_right_nav a{
+	font-size: 16px;
+	color:#878787;
+}
+.ad2_top_right_nav a:hover{
+	color:#CD6600;
+}
+.ad2_bottom a {
+	margin-top: 20px;
+	margin-left: 30px;
+}
+
+/* footer部分*/
+.footer{
+	margin-bottom: 50px;
+}
+.copyright{
+	width:900px;
+	height:50px;
+	line-height: 50px;
+	text-align: center;
+	background-color: #7AC5CD;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px; 
+}
+.copyright p{
+	font-size: 15px;
+	color:white;
+}

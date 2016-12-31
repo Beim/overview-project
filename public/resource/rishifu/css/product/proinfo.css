@@ -1,0 +1,37 @@
+.briefPic{
+	margin-top: 15px;
+	border:1px #ccc solid;
+	height:195px;
+	width:700px;
+	margin-left: 15px;
+	margin-bottom: 15px;
+}
+.text3{
+	min-height:350px;
+	width:700px;
+	padding-top: 14px;
+	border:3px #fff solid;
+	border-top: none;
+	box-shadow: 0px 0px 10px 0px #666;
+	background: url(../../image/company/text2_border_top.jpg) 0 0 no-repeat;
+	background-color: #fff;
+}
+.text3_title{
+	font-size: 25px;
+	font-weight: bold;
+	font-family: "微软雅黑";
+	color:#000;
+	margin-left: 20px;
+	
+}
+.text3_content{
+	color:#000;
+	word-spacing: 5px;
+	font-size: 15px;
+	line-height: 15px;
+	margin-left: 20px;
+}
+.deteilPic{
+	display:block;
+	margin: 0 auto;
+}

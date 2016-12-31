@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>生产及采购网络</title>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/main/index.css">
+	<link rel="stylesheet" type="text/css" href="../css/main/sitemap.css">
+	<link rel="stylesheet" type="text/css" href="../css/tab-nav.css">
+    <script type="text/javascript" src="../js/echarts.min.js"></script>
+    <script type="text/javascript" src="../js/world.js"></script>
+    <script type="text/javascript" src="../js/mapConfig.js"></script>
+
+
+</head>
+<body>
+	<section class="header">
+		<div class="container-fluid">
+			<div class="row">
+				<a href="index.html" class="col-xs-4 logo">
+					Company Logo
+				</a>
+
+				<div class="col-xs-offset-4 col-xs-4 ">
+					<a href="index.html" class="nav ">
+						<span>主页</span>
+					</a>
+					<a href="sitemap.html" class="nav ">
+						<span>网站地图</span>
+					</a>
+					<a href="contact.html" class="nav">
+						<span>联系我们</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="content">
+		
+		<!--选项卡标题-->
+		<div class="tab-nav" style="margin-top:20px;">
+			<div class="title cf">
+				<ul class="title-list fr cf ">
+					<li id="productli1">关于公司</li>
+					<li>水产类产品</li>
+					<li>畜产类产品</li>
+					<p><b></b></p>
+				</ul>
+			</div>
+		</div>
+		<!--选项卡内容-->
+		<div class="product-wrap">
+			<!--内容1-->
+			<div class="product product1">
+				<ul class="cf">
+					<li class="m10">
+						<p class="mt10">
+							<a href="../company/index.html">公司概要</a>
+						</p>
+					</li>
+					<li class="m10">
+						<p class="mt10">
+							<a href="../company/message.html">公司理念</a>
+						</p>
+					</li>
+					<li class="m10">
+						<p class="mt10">
+							<a href="../company/global.html">生产及采购网络</a>
+						</p>
+					</li>
+					<li class="m10">
+						<p class="mt10">
+							<a href="../company/product1_overview.html">水产品简介</a>
+						</p>
+					</li>
+					<li class="m10">
+						<p class="mt10">
+							<a href="../company/product2_overview.html">畜产品简介</a>
+						</p>
+					</li>
+				</ul>
+			</div>
+			<!--内容2-->
+			<div class="product">
+				<ul class="cf">
+					<li class="m10">
+						<p class="mt10">
+							<a href="../product/product1.html">水产品列表</a>
+						</p>
+					</li>
+					<li class="m10">
+						<p class="mt10">
+							<a href="../company/global.html">生产及采购网络</a>
+						</p>
+					</li>
+				</ul>
+			</div>
+			<!--内容3-->
+			<div class="product">
+				<ul class="cf">
+					<li class="m10">
+						<p class="mt10">
+							<a href="../product/product2.html">畜产品列表</a>
+						</p>
+					</li>
+					<li class="m10">
+						<p class="mt10">
+							<a href="../company/global.html">生产及采购网络</a>
+						</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+			
+		<!--中心板块-->
+		<div class="main clearfix" id="main" style="width:900px;">
+			<script type="text/javascript" src="../js/chart.js"></script>
+		</div>	
+
+		<button class="" id="showbtn"  data-toggle="modal" data-target="#list"></button>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="list" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">该地区生产及采购产品如下</h4>
+					</div>
+					<div class="modal-body container">
+						<div class="row" id="map">
+							
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal -->
+		</div>
+		
+	</section>
+
+
+	<section class="footer">
+		<div class="copyright">
+			<p>Copyright (C) 2016 HIT Jzb S. All rights reserved.</p>
+		</div>
+	</section>
+
+
+	<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/tab-nav.js"></script>
+	<script type="text/javascript" src="../js/util.js"></script>
+	<script type="text/javascript" >
+		$(document).ready(function(){
+			var code;
+			myChart.on('click', (params) => {
+				let code = mapConfig.code[params.name]
+				$("#map").empty();
+				fetch('GET',beim+"/api/products/"+code).then(e =>{
+					e = JSON.parse(e)
+					let length = e.length;
+					if (length != 0){
+						$("#showbtn").click();
+						for(i=0;i<length;i++){
+						let div = `
+							<div style="width:400px;margin-left:100px;margin-bottom:10px;" >
+								<a href="../product/product_info.html#${e[i].proName}">
+									<img style="border:1px #ccc solid;width:393px;height:97px;" alt="${e[i].proName}" src="${e[i].briefPic}">
+								</a>
+							</div>
+						`
+						$("#map").append(div)
+						}
+					}
+					
+				})
+			})
+			fetch('GET',beim +"/api/worldmap").then(res =>{
+				res = JSON.parse(res)
+				console.log(res)
+				let length = res.length;
+				arr = res.map(value => {
+					let obj = {
+						code: value.area
+					}
+					if (value.proClass === "product1") {
+						obj.defaultColor = 1
+					}
+					else {
+						obj.defaultColor = 0
+					}
+					return obj
+				})
+				console.log(arr)
+				makeChart(arr)
+			})
+		})
+		
+	</script>
+	
+</body>
+</html>

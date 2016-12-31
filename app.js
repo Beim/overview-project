@@ -52,7 +52,7 @@ for (let key in routeOpts) {
 app.use(koaRouter.routes())
 
 // koa-static
-app.use(koaStatic(path.join(__dirname, '/public')))
+app.use(koaStatic(path.join(__dirname, '/public/resource')))
 // *********end middwares******************
 
 module.exports = app

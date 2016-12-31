@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>后台管理</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/datepicker3.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<h4 style="color:white;">后台管理</h4>
+			</div>
+		</div><!-- /.container-fluid -->
+	</nav>
+		
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<ul class="nav menu">
+			<li  class="parent">
+				<a href="index.html">
+					<span class="glyphicon glyphicon-list"></span> 主页 <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span> 
+				</a>
+				<ul class="children collapse in" id="sub-item-1">
+					<li>
+						<a class="" href="index.html">
+							<span class="glyphicon glyphicon-share-alt"></span> 主页内容
+						</a>
+					</li>
+					<li>
+						<a class="" href="company_overview.html">
+							<span class="glyphicon glyphicon-share-alt"></span> 公司概况
+						</a>
+					</li>
+					<li>
+						<a class="" href="message.html">
+							<span class="glyphicon glyphicon-share-alt"></span> 公司理念
+						</a>
+					</li>
+					<li>
+						<a class="" href="product1_overview.html">
+							<span class="glyphicon glyphicon-share-alt"></span> 水产品简介
+						</a>
+					</li>
+					<li>
+						<a class="" href="product2_overview.html">
+							<span class="glyphicon glyphicon-share-alt"></span> 畜产品简介
+						</a>
+					</li>
+				</ul>
+			</li>
+
+			<li><a href="product1.html"><span class="glyphicon glyphicon-th"></span> 水产品</a></li>
+			<li class="active"><a href="product2.html"><span class="glyphicon glyphicon-stats"></span> 畜产品</a></li>
+
+			
+		</ul>
+	</div>
+		
+	<!--/.main-->
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<div style="margin-top:30px;" class="col-xs-9 col-xs-offset-1">
+				<table class="table">
+					<caption style="font-weight:bold;margin-bottom:25px;font-size:16px;margin-left:-35px;">畜产品列表</caption>
+					<thead>
+						<tr>
+							<th>名称</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="list">
+						
+					</tbody>
+				</table>
+				<button style="margin:0 auto;" class="btn btn-success" data-toggle="modal" data-target="#add">新增</button>
+			</div>
+		</div>
+	</div>
+
+	<!--新增模态框-->
+	<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">新增产品</h4>
+				</div>
+				<div class="modal-body">
+					<div style="margin-top:10px;" class="input-group">
+						<span class="input-group-addon">产品名称</span>
+						<input type="text" id="text1" placeholder="请输入产品名称" required="required" class="form-control" >
+					</div>
+					<div style="margin-top:10px;" class="input-group">
+						<span class="input-group-addon">产品描述</span>
+						<textarea class="form-control" id="text2"  placeholder="请输入产品的详细信息" required="required" style="height:282px;resize:none;"></textarea>
+					</div>
+					<div style="margin-top:10px;" class="input-group">
+						<span class="input-group-addon">产品缩略图</span>
+						<input type="file" id="pic1" >
+					</div>
+					<div style="margin-top:10px;" class="input-group">
+						<span class="input-group-addon">产品详细图</span>
+						<input type="file" id="pic2" >
+					</div>
+					<div style="margin-top:10px;" class="input-group">
+						<span class="input-group-addon">选择地区</span>
+						<select class="form-control"  id="area"></select>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="add();">提交</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+
+	<div class="modal fade"  id="deteil" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">更改产品内容</h4>
+				</div>
+				<div class="modal-body">
+					<div style="margin-top:10px;" class="input-group">
+						<span class="input-group-addon">产品名称</span>
+						<input type="text" id="page1" placeholder="请输入产品名称" required="required" class="form-control" >
+					</div>
+					<div style="margin-top:10px;" class="input-group">
+						<span class="input-group-addon">产品描述</span>
+						<textarea class="form-control" id="page2"  placeholder="请输入产品的详细信息" required="required" style="height:202px;resize:none;"></textarea>
+					</div>
+					<div style="margin-top:10px;" class="input-group">
+						<span class="input-group-addon">产品缩略图</span>
+						<img src="" style="height:97px;width:393px;border:1px #ccc solid;" id="img">
+						<input onchange="changepic1();"  type="file" id="briefPic" >
+					</div>
+					<div style="margin-top:10px;" class="input-group">
+						<span class="input-group-addon">产品详细图</span>
+						<img src="" style="height:120px;width:430px;border:1px #ccc solid;" id="page3">
+						<input onchange="changepic2();" type="file" id="deteilPic" >
+					</div>
+					<div style="margin-top:10px;" class="input-group">
+						<span class="input-group-addon">选择地区</span>
+						<select class="form-control changearea"></select>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" onclick="upload();" class="btn btn-primary">提交更改</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+
+
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/util.js"></script>
+	<script type="text/javascript" src="js/map.js"></script>
+	<script type="text/javascript">
+	var data;
+	var dataname;
+		$(document).ready(function(){
+			fetch('GET',beim +"/api/lineup/product2").then(res =>{
+				res = JSON.parse(res)
+				data = res;
+				let length = res.length
+				for(i=0;i<length;i++){
+					let tr = `
+						<tr>
+							<td style="width:295px;">${res[i].proName}</td>
+							<td style="width:195px;">
+								<a class="btn btn-primary"onClick="deteil(${i});" data-toggle="modal" data-target="#deteil">编辑</a>
+								<a style="margin-left:40px;"class="btn btn-danger"onClick="deletethis(${i});">删除</a>
+							</td>
+						</tr>
+						`
+					$("#list").append(tr);
+				}
+			})
+			islogin().then(res => {
+				if(res == -1){
+					window.location.href="login.html"
+				}
+			})
+		})
+		const getFile = (domObj) => {
+			return new Promise((res, rej) => {
+				let img = domObj.files[0]
+				if (!img) {
+					return res('')
+				}
+				let fileReader = new FileReader()
+				fileReader.onload = (e) => {
+					res(e.target.result)
+				}
+				fileReader.readAsDataURL(img)
+			})
+		}
+		var add = function(){
+			let text1 = $("#text1").val();
+			let text2 = $("#text2").val();
+			let pic1 = document.getElementById("pic1");
+			let pic2 = document.getElementById("pic2");
+			let ids = ['pic1', 'pic2']
+			let doms = ids.map(value => document.getElementById(value)).filter(e => e)
+			let promises = doms.map(value => getFile(value))
+			Promise.all(promises).then(([text3, text4]) => {
+				let text5 = $("#area").val()
+				let data = {
+					proClass: 'product2',
+					proName: text1,
+					area: text5 ,
+					briefPic: text3,
+					page: [text1, text2, text4]
+				}
+				return fetch('POST', beim +'/api/product/', data)
+			}).then(res => {
+				if(res == 1){
+					location.reload() 
+				}
+				else{
+					alert("添加产品失败")
+				}
+			})
+		}
+		var deteil = function(o){
+			dataname = data[o].proName;
+			console.log(dataname)
+			$("#page1").val(data[o].page[0]);
+			$("#page2").val(data[o].page[1]);
+			$("#page3").attr('src',data[o].page[2])
+			$("#img").attr('src',data[o].briefPic);
+			$(".changearea").val(data[o].area);
+		}
+		var deletethis = function(e){
+			dataname = data[e].proName;
+		  	fetch('DELETE', beim +'/api/product/'+dataname).then(e =>{
+		  		if(e ==1){
+		  			location.reload() 
+		  		}
+		  		else{
+		  			alert("删除失败");
+		  		}
+		  	})
+		}
+		var upload = function(){
+			let pic1 = document.getElementById("briefPic");
+			let pic2 = document.getElementById("deteilPic");
+			let ids = ['briefPic', 'deteilPic']
+			let doms = ids.map(value => document.getElementById(value)).filter(e => e)
+			let promises = doms.map(value => getFile(value))
+			Promise.all(promises).then(([img, page3]) =>{
+				let page1 = $("#page1").val()
+				if(!img && !page3){
+					let imgsrc = $("#img")[0].src;
+					let page3src = $("#page3")[0].src;
+					let changedata = {
+						proClass: 'product2',
+						proName: page1,
+						area: $(".changearea").val(),
+						briefPic: imgsrc,
+						page: [$("#page1").val(), $("#page2").val(), page3src]
+					}
+					console.log(changedata)
+					return fetch('PUT', beim +'/api/product/'+dataname, changedata)
+				}
+				else if(!img){
+					let imgsrc = $("#img")[0].src;
+					let changedata = {
+						proClass: 'product2',
+						proName: page1,
+						area: $(".changearea").val(),
+						briefPic: imgsrc,
+						page: [$("#page1").val(), $("#page2").val(), page3]
+					}
+					console.log(changedata)
+					return fetch('PUT', beim +'/api/product/'+dataname, changedata)
+				}
+				else if(!page3){
+					let page3src = $("#page3")[0].src;
+					let changedata = {
+						proClass: 'product2',
+						proName: page1,
+						area: $(".changearea").val(),
+						briefPic: img,
+						page: [$("#page1").val(), $("#page2").val(), page3src]
+					}
+					console.log(changedata)
+					return fetch('PUT', beim +'/api/product/'+dataname, changedata)
+				}
+				else{
+					let changedata = {
+						proClass: 'product2',
+						proName: page1,
+						area: $(".changearea").val(),
+						briefPic: img,
+						page: [$("#page1").val(), $("#page2").val(), page3]
+					}
+					console.log(changedata)
+					return fetch('PUT', beim +'/api/product/'+dataname, changedata)
+				}
+				
+			}).then(res => {
+				if(res ==1){
+					location.reload() 
+				}
+				else{
+					alert("修改失败")
+				}
+			})
+		}
+		var changepic1 = function(){
+			let pic1 = document.getElementById("briefPic");
+			getFile(pic1).then(e =>{
+				let imgsrc = e;
+				$("#img").attr("src",imgsrc)
+				//fetch('POST',beim + )
+			})
+		}
+		var changepic2 = function(){
+			let pic2 = document.getElementById("deteilPic");
+			getFile(pic2).then(e =>{
+				let page3src = e
+				$("#page3").attr("src",page3src)
+				//fetch('POST',beim + )
+			})
+		}
+	</script>
+	<script>
+		!function ($) {
+			$(document).on("click","ul.nav li.parent > a > span.icon", function(){		  
+				$(this).find('em:first').toggleClass("glyphicon-minus");	  
+			}); 
+			$(".sidebar span.icon").find('em:first').addClass("glyphicon-minus");
+		}(window.jQuery);
+
+		$(window).on('resize', function () {
+		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+		})
+		$(window).on('resize', function () {
+		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+		})
+	</script>	
+</body>
+
+</html>

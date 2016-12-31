@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>后台管理</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/datepicker3.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<h4 style="color:white;">后台管理</h4>
+			</div>
+		</div><!-- /.container-fluid -->
+	</nav>
+		
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<ul class="nav menu">
+			<li  class="parent active ">
+				<a href="index.html">
+					<span class="glyphicon glyphicon-list"></span> 主页 <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span> 
+				</a>
+				<ul class="children collapse in" id="sub-item-1">
+					<li>
+						<a class="" href="index.html">
+							<span class="glyphicon glyphicon-share-alt"></span> 主页内容
+						</a>
+					</li>
+					<li>
+						<a class="" href="company_overview.html">
+							<span class="glyphicon glyphicon-share-alt"></span> 公司概况
+						</a>
+					</li>
+					<li>
+						<a class="" href="message.html">
+							<span class="glyphicon glyphicon-share-alt"></span> 公司理念
+						</a>
+					</li>
+					<li>
+						<a class="" href="product1_overview.html">
+							<span class="glyphicon glyphicon-share-alt"></span> 水产品简介
+						</a>
+					</li>
+					<li>
+						<a class="" href="product2_overview.html">
+							<span class="glyphicon glyphicon-share-alt"></span> 畜产品简介
+						</a>
+					</li>
+				</ul>
+			</li>
+
+			<li><a href="product1.html"><span class="glyphicon glyphicon-th"></span>水产品</a></li>
+			<li><a href="product2.html"><span class="glyphicon glyphicon-stats"></span>畜产品</a></li>
+
+			
+		</ul>	
+	</div>
+		
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<h2 class=" " style="font-weight:bold;margin-left:200px;">主页内容修改</h2>
+			<h4 style="margin-left:200px;">轮播图片修改</h4>
+			<div style="width:400px;" class="alert alert-danger hide" id="wrong">修改出现了错误</div>
+			<div class="carousel slide" style="width:898px;margin:0 auto;" data-ride="carousel" id="carousel" >
+				<!--轮播列表-->
+				<ol class="carousel-indicators">
+					<li data-target="#carousel" data-slide-to="0" class="active"></li>
+					<li data-target="#carousel" data-slide-to="1"></li>
+					<li data-target="#carousel" data-slide-to="2"></li>
+					<li data-target="#carousel" data-slide-to="3"></li>
+				</ol>
+
+				<!--轮播项目-->
+				<div class="carousel-inner">
+					<div class="item active">
+						<img class="carousel-img" id="carousel-img1" style="height:229px;width:898px;" src="" height="229" width="898" alt="图片1">
+					</div>
+
+					<div class="item">
+						<img class="carousel-img" id="carousel-img2" style="height:229px;width:898px;" src="" height="229" width="898" alt="图片2">
+					</div>
+
+					<div class="item">
+						<img class="carousel-img" id="carousel-img3" style="height:229px;width:898px;" src="" height="229" width="898" alt="图片3">
+					</div>
+
+					<div class="item">
+						<img class="carousel-img" id="carousel-img4" style="height:229px;width:898px;" src="" height="229" width="898" alt="图片4	">
+					</div>
+				</div>
+
+				<!--前后切换-->
+				<div>
+					<a href="#carousel" class="carousel-control left" data-slide="prev">&lsaquo;
+					</a>
+					<a href="#carousel" class="carousel-control right" data-slide="next">&rsaquo;
+					</a>
+				</div>
+			</div>
+
+			<hr>
+			<div style="margin-bottom:10px;" class="input-group col-xs-5 col-xs-offset-2">
+				<span class="input-group-addon">修改图片1</span>
+				<input type="file" id="pic1" class="form-control" >
+			</div>
+			<div style="margin-bottom:10px;" class="input-group col-xs-5 col-xs-offset-2">
+				<span class="input-group-addon">修改图片2</span>
+				<input type="file" id="pic2" class="form-control" >
+			</div>
+			<div style="margin-bottom:10px;" class="input-group col-xs-5 col-xs-offset-2">
+				<span class="input-group-addon">修改图片3</span>
+				<input type="file" id="pic3" class="form-control" >
+			</div>
+			<div style="margin-bottom:10px;" class="input-group col-xs-5 col-xs-offset-2">
+				<span class="input-group-addon">修改图片4</span>
+				<input type="file" id="pic4" class="form-control" >
+			</div>
+			<hr>
+			<button class="col-xs-1 col-xs-offset-4 btn btn-primary" onClick='pushImg()'>上传</button>
+
+        </div>
+		</div>
+	</div><!--/.main-->
+
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/util.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		const getImg = () => {
+			let ids = ['carousel-img1', 'carousel-img2', 'carousel-img3', 'carousel-img4']
+			let doms = ids.map(value => document.getElementById(value)).filter(e => e)
+			fetch('GET', beim + '/api/headerpic').then(res => {
+				res = JSON.parse(res)
+				doms.forEach((value, index) => {
+					index = parseInt(index)
+					value.setAttribute('src', res[index])
+				})
+			})
+		}
+		getImg();
+		islogin().then(res => {
+			if(res == -1){
+				window.location.href="login.html"
+			}
+		})
+	});
+	const getFile = (domObj) => {
+		return new Promise((res, rej) => {
+			let img = domObj.files[0]
+			if (!img) {
+				return res('')
+			}
+			let fileReader = new FileReader()
+			fileReader.onload = (e) => {
+				res(e.target.result)
+			}
+			fileReader.readAsDataURL(img)
+		})
+	}
+	
+	const pushImg = () => {
+		let ids = ['pic1', 'pic2', 'pic3', 'pic4']
+		let doms = ids.map(value => document.getElementById(value)).filter(e => e)
+		let promises = doms.map(value => getFile(value))
+		Promise.all(promises).then(res => {
+			return fetch('POST', beim + '/api/headerpic', res)
+		}).then(res => {
+        	if(res==1){
+        		location.reload() 
+        	}
+        	else{
+        		$("#wrong").removeClass("hide");
+        	}
+    	})
+	}
+	</script>
+	<script>
+		!function ($) {
+			$(document).on("click","ul.nav li.parent > a > span.icon", function(){		  
+				$(this).find('em:first').toggleClass("glyphicon-minus");	  
+			}); 
+			$(".sidebar span.icon").find('em:first').addClass("glyphicon-minus");
+		}(window.jQuery);
+
+		$(window).on('resize', function () {
+		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+		})
+		$(window).on('resize', function () {
+		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+		})
+
+		
+	</script>	
+</body>
+
+</html>

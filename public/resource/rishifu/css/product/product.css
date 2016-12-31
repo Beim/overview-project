@@ -1,0 +1,28 @@
+.title_img{
+	margin-top: 20px;
+	margin-left: 20px;
+}
+.list_title{
+	width: 820px;
+	height:47px;
+	line-height: 47px;
+	background-color: #3A5FCD;
+	border-radius: 5px;
+	margin-left: 40px;
+}
+.list_title h4{
+	color:white;
+	line-height: 47px;
+	margin-left: 20px;
+	font-family: "宋体";
+}
+.list{
+	width:850px;
+}
+.list-item{
+	text-align: center;
+	margin-top: 10px;
+}
+.list-item a img{
+	border:1px #ccc solid;
+}
