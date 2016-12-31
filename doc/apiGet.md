@@ -148,3 +148,37 @@
 ]
 错误返回-1
 ```
+
+## url: /api/products/{area}
+
+@return
+```
+成功返回数组
+[
+  {
+    "proClass": "product1",
+    "proSubClass": "product1",
+    "proName": "productB",
+    "area": "BZ",
+    "briefPic": "dataURL",
+    "page": [
+      1,
+      2,
+      3
+    ],
+  },
+  {
+    "proClass": "product1",
+    "proSubClass": "product1",
+    "proName": "productA",
+    "area": "BZ",
+    "briefPic": "dataURL",
+    "page": [
+      1,
+      2,
+      3
+    ],
+  },
+]
+错误返回-1
+```

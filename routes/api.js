@@ -59,6 +59,12 @@ router.get('/worldmap', function *(next) {
     this.body = res
 })
 
+router.get('/products/:area', function *(next) {
+    let area = this.params.area
+    let res = yield mongo.get.products({area})
+    this.body = res
+})
+
 /*
  * POST
  */

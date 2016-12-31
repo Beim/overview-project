@@ -135,6 +135,19 @@ exports.get = {
                 resolve(-1)
             })
         })
+    },
+
+    products: (limits, parse = {_id: 0, __v: 0}) => {
+        return new Promise((resolve, reject) => {
+            gmodel('products').find(limits, parse)
+            .then(docs => {
+                resolve(docs)
+            })
+            .catch(e => {
+                log('get-products-error', e)
+                resolve(-1)
+            })
+        })
     }
 }
 
