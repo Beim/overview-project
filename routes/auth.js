@@ -1,7 +1,7 @@
 /*
  * 密码
  */
-const key = '123456'
+const key = ['123456', '30lin0834']
 
 const router = require('koa-router')()
 
@@ -11,7 +11,7 @@ router.get('/islogin', function *(next) {
 
 router.post('/login', function *(next) {
     let data = this.request.body
-    let ok = (!!data.key && data.key === key)
+    let ok = (!!data.key && key.includes(data.key))
     this.session.log = ok
     this.body = {ok}
 })

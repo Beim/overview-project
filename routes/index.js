@@ -1,7 +1,7 @@
 const router = require('koa-router')()
 
 router.get('/', function *(next) {
-    this.body = 'Hello World@'
+    this.redirect("/rishifu/index.html")
 })
 
 module.exports = router
