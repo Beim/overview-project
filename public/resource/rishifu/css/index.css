@@ -19,8 +19,10 @@ body{
 }
 .logo{
 	font-family: "微软雅黑";
+	display:inline-block;
 	font-weight: 800;
-	height:80px;
+	height:100px;
+	width:182px;
 	line-height: 80px;
 	font-size: 25px;
 }

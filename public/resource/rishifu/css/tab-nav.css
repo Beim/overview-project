@@ -12,7 +12,8 @@ img{ border:none;}
 .tab-nav .title h2{ font-size: 20px;font-family: "microsoft yahei";}
 .tab-nav .title-list{ position: relative; top: 6px;}
 .tab-nav .title-list ul{}
-.tab-nav .title-list li{ width: 285px; line-height: 20px; text-align: center; float: left; display: inline;font-family: "微软雅黑";font-size: 15px;font-weight: bold;user-select:none;-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;}
+.tab-nav .title-list li { width: 285px; line-height: 20px; text-align: center; float: left; display: inline;font-family: "微软雅黑";font-size: 15px;font-weight: bold;/*user-select:none;-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;*/}
+.tab-nav .title-list li a{font-family: "微软雅黑";font-size: 15px;font-weight: bold;}
 .tab-nav .title-list li.on{ color: #ff6600; font-weight: bold;}
 .tab-nav .title-list p{position:absolute;top:24px;left:0px;width:285px;height:7px;border-top: 3px solid #ff6600; overflow: hidden; text-align: center;}
 .tab-nav .title-list b{display:inline-block;width:0;height:0;margin-top:-3px;border-style:solid dashed dashed dashed;border-width:9px;border-color: #ff6600 #fff #fff #fff;overflow: hidden;zoom: 1;font-size: 0;}
@@ -25,3 +26,4 @@ img{ border:none;}
 .product-wrap .product li p{padding-left: 10px;color: #fff;line-height: 22px; display:inline-block;font-family: "微软雅黑"}
 .product-wrap .product li p a{ color: #fff; text-decoration: none; font-size: 13px;}
 .product-wrap .product li p a:hover{ color: #ff6600; text-decoration: none;}
+.product-wrap .product li p a.on{ color: #ff6600; text-decoration: none;}

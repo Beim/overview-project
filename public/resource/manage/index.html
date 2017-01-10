@@ -138,6 +138,11 @@
 	<script type="text/javascript" src="js/util.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
+		islogin().then(res => {
+			if(res == -1){
+				window.location.href="login.html"
+			}
+		})
 		const getImg = () => {
 			let ids = ['carousel-img1', 'carousel-img2', 'carousel-img3', 'carousel-img4']
 			let doms = ids.map(value => document.getElementById(value)).filter(e => e)
@@ -150,11 +155,6 @@
 			})
 		}
 		getImg();
-		islogin().then(res => {
-			if(res == -1){
-				window.location.href="login.html"
-			}
-		})
 	});
 	const getFile = (domObj) => {
 		return new Promise((res, rej) => {

@@ -15,10 +15,10 @@
 		<div class="container-fluid">
 			<div class="row">
 				<a href="../index.html" class="col-xs-4 logo">
-					Company Logo
+					<img src="../image/index/logo.png" height="80" width="158">
 				</a>
 
-				<div class="col-xs-offset-4 col-xs-4 ">
+				<div class="col-xs-offset-5 col-xs-4 ">
 					<a href="../index.html" class="nav ">
 						<span>主页</span>
 					</a>
@@ -39,9 +39,9 @@
 		<div class="tab-nav" style="margin-top:20px;">
 			<div class="title cf">
 				<ul class="title-list fr cf ">
-					<li id="productli1">关于公司</li>
-					<li>关于水产类产品</li>
-					<li>关于畜产类产品</li>
+					<li id="productli1"><a href="../company/index.html">关于公司</a></li>
+					<li id="productli2"><a href="../product/product1.html">水产类产品</a></li>
+					<li id="productli3"><a href="../product/product2.html">畜产类产品</a></li>
 					<p><b></b></p>
 				</ul>
 			</div>
@@ -68,7 +68,7 @@
 					</li>
 					<li class="m10">
 						<p class="mt10">
-							<a href="../company/product1_overview.html">水产品简介</a>
+							<a class="on" href="../company/product1_overview.html">水产品简介</a>
 						</p>
 					</li>
 					<li class="m10">
@@ -79,7 +79,7 @@
 				</ul>
 			</div>
 			<!--内容2-->
-			<div class="product">
+			<div class="product product2">
 				<ul class="cf">
 					<li class="m10">
 						<p class="mt10">
@@ -88,13 +88,13 @@
 					</li>
 					<li class="m10">
 						<p class="mt10">
-							<a href="../company/global.html">生产及采购网络</a>
+							<a href="../company/global.html?product1">生产及采购网络</a>
 						</p>
 					</li>
 				</ul>
 			</div>
 			<!--内容3-->
-			<div class="product">
+			<div class="product product3">
 				<ul class="cf">
 					<li class="m10">
 						<p class="mt10">
@@ -103,7 +103,7 @@
 					</li>
 					<li class="m10">
 						<p class="mt10">
-							<a href="../company/global.html">生产及采购网络</a>
+							<a href="../company/global.html?product2">生产及采购网络</a>
 						</p>
 					</li>
 				</ul>
@@ -174,6 +174,8 @@
 	<script type="text/javascript" src="../js/util.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
+			$(".product1").addClass('show');
+			$("#productli1").addClass('on');
 			fetch('GET',beim +"/api/overview/product1_overview").then(res =>{
 				res = JSON.parse(res)
 				console.log(res)
