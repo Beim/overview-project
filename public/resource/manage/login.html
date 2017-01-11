@@ -41,7 +41,7 @@
 	<script type="text/javascript" src="js/util.js"></script>
 	<script type="text/javascript">
 		var mylogin = function(){
-			login($("#password").val(), 'http://beim.site:2334/auth/login').then(res => {
+			login($("#password").val(), '/auth/login').then(res => {
 				console.log(res)
 				  if(res == 1){
 				  	window.location.href = "index.html"
