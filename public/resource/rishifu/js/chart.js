@@ -111,19 +111,25 @@ const makeOption = (mapData) => {
                 type: 'scatter',
                 coordinateSystem: 'geo',
                 data: mapData.map(function (itemOpt) {
-                    return {
-                        name: itemOpt.name,
-                        value: [
-                            latlong[itemOpt.code].longitude,
-                            latlong[itemOpt.code].latitude,
-                            itemOpt.value
-                        ],
-                        itemStyle: {
-                            normal: {
-                                color: itemOpt.color
+                    if (!itemOpt.code) {
+                        return {}
+                    }
+                    else {
+                        return {
+                            name: itemOpt.name,
+                            value: [
+                                latlong[itemOpt.code].longitude,
+                                latlong[itemOpt.code].latitude,
+                                itemOpt.value
+                            ],
+                            itemStyle: {
+                                normal: {
+                                    color: itemOpt.color
+                                }
                             }
-                        }
-                    };
+                        };
+                      
+                    }
                 })
             }
         ]
