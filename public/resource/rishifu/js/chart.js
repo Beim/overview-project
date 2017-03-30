@@ -111,7 +111,7 @@ const makeOption = (mapData) => {
                 type: 'scatter',
                 coordinateSystem: 'geo',
                 data: mapData.map(function (itemOpt) {
-                    if (!itemOpt.code) {
+                    if (!itemOpt.code || itemOpt.code == 'null') {
                         return {}
                     }
                     else {
